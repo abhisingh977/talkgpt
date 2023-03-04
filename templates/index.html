@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Chatbot Example</title>
+    <style>
+      body {
+        background-color: #222;
+        color: #fff;
+      }
+
+      #chatbot-container {
+        background-color: #444;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        margin: 20px auto;
+        max-width: 1000px;
+      }
+
+      #chatbot-messages {
+        max-height: 1000px;
+        overflow-y: auto;
+      }
+
+      .message {
+        padding: 10px;
+        margin-bottom: 10px;
+        border-radius: 5px;
+      }
+
+      .sent {
+        background-color: #555;
+        text-align: left;
+      }
+
+      .received {
+        background-color: #666;
+        text-align: left;
+      }
+
+      input[type="text"] {
+        padding: 10px;
+        border-radius: 5px;
+        border: none;
+        width: 70%;
+      }
+
+      button[type="submit"] {
+        padding: 10px;
+        border-radius: 5px;
+        border: none;
+        background-color: #555;
+        color: #fff;
+        width: 28%;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="chatbot-container">
+      <div id="chatbot-messages">
+        <div class="message received">Start writing</div>
+      </div>
+      <form id="chatbot-form" onsubmit="submitForm(); return false;">
+        <input type="text" id="chatbot-input" placeholder="Start writing">
+        <button type="submit">Send</button>
+      </form>
+    </div>
+
+    <script>
+      function submitForm() {
+        var input = document.getElementById("chatbot-input").value;
+        var messages = document.getElementById("chatbot-messages");
+
+        // Add user message to chat window
+        var userMessage = document.createElement("div");
+        userMessage.className = "message sent";
+        userMessage.innerHTML = input;
+        messages.appendChild(userMessage);
+
+        // Clear input field
+        document.getElementById("chatbot-input").value = "";
+
+        // Send message to server
+        fetch('/process-message', {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({'message': input})
+        })
+        .then(response => response.json())
+        .then(data => {
+          // Add chatbot message to chat window
+          var chatbotMessage = document.createElement("div");
+          chatbotMessage.className = "message received";
+          chatbotMessage.innerHTML = data.message;
+          messages.appendChild(chatbotMessage);
+        });
+      }
+    </script>
+  </body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <!DOCTYPE html>
+<html>
+  <head>
+    <title>Chatbot Example</title>
+  </head>
+  <body>
+    <div id="chatbot-container">
+      <div id="chatbot-messages">
+        <div class="message received">Hello! How can I help you today?</div>
+      </div>
+      <form id="chatbot-form" onsubmit="submitForm(); return false;">
+        <input type="text" id="chatbot-input" placeholder="Type your message here...">
+        <button type="submit">Send</button>
+      </form>
+    </div>
+
+    <script>
+      function submitForm() {
+        var input = document.getElementById("chatbot-input").value;
+        var messages = document.getElementById("chatbot-messages");
+
+        // Add user message to chat window
+        var userMessage = document.createElement("div");
+        userMessage.className = "message sent";
+        userMessage.innerHTML = input;
+        messages.appendChild(userMessage);
+
+        // Clear input field
+        document.getElementById("chatbot-input").value = "";
+
+        // Send message to server
+        fetch('/process-message', {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({'message': input})
+        })
+        .then(response => response.json())
+        .then(data => {
+          // Add chatbot message to chat window
+          var chatbotMessage = document.createElement("div");
+          chatbotMessage.className = "message received";
+          chatbotMessage.innerHTML = data.message;
+          messages.appendChild(chatbotMessage);
+        });
+      }
+    </script>
+  </body>
+</html>
+
+
+<!-- <!DOCTYPE html>
+<html>
+  <head>
+    <title>Text Input Example</title>
+  </head>
+  <body>
+    <h1>Enter some text:</h1>
+    <form action="/process-text" method="post">
+      <label for="input-text">Text:</label>
+      <input type="text" id="input-text" name="input-text">
+      <button type="submit">Submit</button>
+    </form>
+  </body>
+</html> --> -->
