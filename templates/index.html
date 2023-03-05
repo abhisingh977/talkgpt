@@ -14,11 +14,11 @@
         border-radius: 5px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
         margin: 20px auto;
-        max-width: 1000px;
+        max-width: 500px;
       }
 
       #chatbot-messages {
-        max-height: 1000px;
+        max-height: 300px;
         overflow-y: auto;
       }
 
@@ -30,7 +30,7 @@
 
       .sent {
         background-color: #555;
-        text-align: left;
+        text-align: right;
       }
 
       .received {
@@ -58,74 +58,6 @@
   <body>
     <div id="chatbot-container">
       <div id="chatbot-messages">
-        <div class="message received">Start writing</div>
-      </div>
-      <form id="chatbot-form" onsubmit="submitForm(); return false;">
-        <input type="text" id="chatbot-input" placeholder="Start writing">
-        <button type="submit">Send</button>
-      </form>
-    </div>
-
-    <script>
-      function submitForm() {
-        var input = document.getElementById("chatbot-input").value;
-        var messages = document.getElementById("chatbot-messages");
-
-        // Add user message to chat window
-        var userMessage = document.createElement("div");
-        userMessage.className = "message sent";
-        userMessage.innerHTML = input;
-        messages.appendChild(userMessage);
-
-        // Clear input field
-        document.getElementById("chatbot-input").value = "";
-
-        // Send message to server
-        fetch('/process-message', {
-          method: 'POST',
-          headers: {'Content-Type': 'application/json'},
-          body: JSON.stringify({'message': input})
-        })
-        .then(response => response.json())
-        .then(data => {
-          // Add chatbot message to chat window
-          var chatbotMessage = document.createElement("div");
-          chatbotMessage.className = "message received";
-          chatbotMessage.innerHTML = data.message;
-          messages.appendChild(chatbotMessage);
-        });
-      }
-    </script>
-  </body>
-</html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- <!DOCTYPE html>
-<html>
-  <head>
-    <title>Chatbot Example</title>
-  </head>
-  <body>
-    <div id="chatbot-container">
-      <div id="chatbot-messages">
         <div class="message received">Hello! How can I help you today?</div>
       </div>
       <form id="chatbot-form" onsubmit="submitForm(); return false;">
@@ -133,26 +65,25 @@
         <button type="submit">Send</button>
       </form>
     </div>
-
     <script>
       function submitForm() {
         var input = document.getElementById("chatbot-input").value;
         var messages = document.getElementById("chatbot-messages");
-
+    
         // Add user message to chat window
         var userMessage = document.createElement("div");
         userMessage.className = "message sent";
         userMessage.innerHTML = input;
         messages.appendChild(userMessage);
-
+    
         // Clear input field
         document.getElementById("chatbot-input").value = "";
-
+    
         // Send message to server
         fetch('/process-message', {
           method: 'POST',
           headers: {'Content-Type': 'application/json'},
-          body: JSON.stringify({'message': input})
+          body: JSON.stringify({'message': input, 'response': ''})
         })
         .then(response => response.json())
         .then(data => {
@@ -161,6 +92,13 @@
           chatbotMessage.className = "message received";
           chatbotMessage.innerHTML = data.message;
           messages.appendChild(chatbotMessage);
+    
+          // Send chatbot response and next user input back to server
+          fetch('/process-message', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({'message': '', 'response': data.message})
+          });
         });
       }
     </script>
@@ -168,17 +106,5 @@
 </html>
 
 
-<!-- <!DOCTYPE html>
-<html>
-  <head>
-    <title>Text Input Example</title>
-  </head>
-  <body>
-    <h1>Enter some text:</h1>
-    <form action="/process-text" method="post">
-      <label for="input-text">Text:</label>
-      <input type="text" id="input-text" name="input-text">
-      <button type="submit">Submit</button>
-    </form>
-  </body>
-</html> --> -->
+
+
