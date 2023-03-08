@@ -3,8 +3,8 @@ import os
 from transformers import GPT2Tokenizer, GPT2LMHeadModel
 app = Flask(__name__)
 
-tokenizer = GPT2Tokenizer.from_pretrained("model/")
-model = GPT2LMHeadModel.from_pretrained("model/")
+tokenizer = GPT2Tokenizer.from_pretrained("/app/model/")
+model = GPT2LMHeadModel.from_pretrained("/app/model/")
 #     # "/home/abhishek/abhi/gita/iss/good_model/checkpoint-3000-2"
 
 
@@ -30,7 +30,7 @@ def chat():
     top_k=20,
     early_stopping=True,
     top_p=0.95,
-    repetition_penalty=20.0,
+    repetition_penalty=5.0,
     )
     generated_text = tokenizer.decode(outputs[0], skip_special_tokens=True)
     print(generated_text[len(text):])

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>ChatGPT</title>
+  <title>WriteGPT</title>
   <style>
     /* Global styles */
     * {
@@ -116,7 +116,7 @@ form.addEventListener('submit', async (event) => {
   const chatContainer = document.querySelector('#chat-container');
   const chatBubble = document.createElement('div');
   chatBubble.classList.add('chat-bubble');
-  chatBubble.innerHTML = `<p><strong>Your Input: </strong> ${userInput}</p><p><strong>TalkGPT: </strong> ${previousResponse}</p>`;
+  chatBubble.innerHTML = `<p><strong>Your Input: </strong> ${userInput}</p><p><strong>WriteGPT: </strong> ${previousResponse}</p>`;
   chatContainer.appendChild(chatBubble);
   
 
