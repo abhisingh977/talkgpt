@@ -3,8 +3,8 @@ import os
 from transformers import GPT2Tokenizer, GPT2LMHeadModel
 app = Flask(__name__)
 
-tokenizer = GPT2Tokenizer.from_pretrained("/app/model/")
-model = GPT2LMHeadModel.from_pretrained("/app/model/")
+tokenizer = GPT2Tokenizer.from_pretrained("model/")
+model = GPT2LMHeadModel.from_pretrained("model/")
 
 
 @app.route("/")
@@ -14,11 +14,11 @@ def index():
 
 @app.route('/chat', methods=['POST'])
 def chat():
-    max_length = 60
+    max_length = 500
 
     data = request.json
     text = data.get('text')
-    print(text)
+
     inputs = tokenizer.encode(text, return_tensors="pt")
     outputs = model.generate(
     inputs,
@@ -31,7 +31,6 @@ def chat():
     repetition_penalty=5.0,
     )
     generated_text = tokenizer.decode(outputs[0], skip_special_tokens=True)
-    print(generated_text[len(text):])
     # Return the response as JSON
     return jsonify({'response': generated_text[len(text):]})
 
