@@ -15,7 +15,6 @@ RUN pip3 install torch==1.9.0+cpu torchvision==0.10.0+cpu torchaudio==0.9.0 -f h
 #Install python libraries from requirements.txt
 RUN pip install -r requirements.txt
 
-
 # Set $PORT environment variable
 ENV PORT 8080
 
