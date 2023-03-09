@@ -5,8 +5,6 @@ app = Flask(__name__)
 
 tokenizer = GPT2Tokenizer.from_pretrained("/app/model/")
 model = GPT2LMHeadModel.from_pretrained("/app/model/")
-#     # "/home/abhishek/abhi/gita/iss/good_model/checkpoint-3000-2"
-
 
 
 @app.route("/")
@@ -16,7 +14,7 @@ def index():
 
 @app.route('/chat', methods=['POST'])
 def chat():
-    max_length = 50
+    max_length = 60
 
     data = request.json
     text = data.get('text')
