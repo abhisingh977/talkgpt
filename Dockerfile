@@ -4,6 +4,7 @@ FROM python:3.8.0-slim
 COPY model /app/model
 COPY templates /app/templates
 COPY main.py /app/main.py
+COPY static /app/static
 COPY requirements.txt /app/requirements.txt
 # Sets the working directory
 WORKDIR /app

@@ -2,15 +2,22 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+ 
   <title>WriteGPT</title>
   <link rel="stylesheet" type="text/css" href="/static/css/chatpage.css">
 </head>
 <body>
+  <div class ="parent">
   <div id="chat-container"></div>
   <form id="chat-form">
+    <div class="type-box">
     <input type="text" id="chat-input" placeholder="Type your story here...">
     <button type="submit" id="chat-submit">Send</button>
+    </div>
   </form>
+</div>
   <script src="/static/js/chatpage.js"></script>
 </body>
 </html>

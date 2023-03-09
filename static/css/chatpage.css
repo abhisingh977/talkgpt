@@ -63,6 +63,16 @@ body {
     outline: none;
 }
 
+/* Submit button */
+.type-box {
+    display: flex;
+    flex-direction: row;
+}
+
+.parent {
+    display: flex;
+    flex-direction: column; 
+}
 
 /* Submit button */
 
