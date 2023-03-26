@@ -65,7 +65,8 @@ def chat():
 
 
 
-    chat_history_ids = model.generate(bot_input_ids, max_length=1000, pad_token_id=tokenizer.eos_token_id)
+    chat_history_ids = model.generate(bot_input_ids,do_sample=True, max_new_tokens=30, pad_token_id=tokenizer.eos_token_id,
+    early_stopping=True, top_k=20, top_p=0.95, repetition_penalty=5.0)
 
     generated_text = tokenizer.decode(chat_history_ids[:, bot_input_ids.shape[-1]:][0], skip_special_tokens=True, padding_side='left')
     print("generated_text")
