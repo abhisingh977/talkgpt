@@ -29,6 +29,7 @@ def crop_sentence(sentence):
 
 @app.route("/")
 def index():
+    session.clear()
     return render_template("index.html")
 
 @app.route('/chat', methods=['POST'])
