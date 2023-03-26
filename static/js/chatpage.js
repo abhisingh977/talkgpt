@@ -17,7 +17,7 @@ form.addEventListener('submit', async (event) => {
     const userInput = inputField.value;
 
     // Combine the previous response and the new user input
-    const text = previousResponse +" "+ userInput;
+    const text = userInput + " ";
 
     // Send the text to the server for processing
     const response = await fetch('/chat', {
